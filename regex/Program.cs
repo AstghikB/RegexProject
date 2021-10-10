@@ -21,40 +21,36 @@ namespace regex
 
         static void Task3()
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\math.txt");
+            string text = System.IO.File.ReadAllText(@"files/math.txt");
             string mathExp =  @"(\d{1,})(\+|\-|\*|\/)(\d{1,})";
-            string group;
-            int result;
+            var actions = new Dictionary<string, Func<string, string, int>>();
+            actions.Add("+", (s1, s2) =>
+            {
+                return int.Parse(s1) + int.Parse(s2);
+            });
+            actions.Add("-", (s1, s2) =>
+            {
+                return int.Parse(s1) - int.Parse(s2);
+            });
+            actions.Add("/", (s1, s2) =>
+            {
+                return int.Parse(s1) - int.Parse(s2);
+            });
+            actions.Add("*", (s1, s2) =>
+            {
+                return int.Parse(s1) * int.Parse(s2);
+            });
             foreach (Match match in Regex.Matches(text, mathExp))
             {
-                group = match.Groups[2].ToString();
-
-                switch (group)
-                {
-                    case "+":
-                        result = Int32.Parse(match.Groups[1].Value) + Int32.Parse(match.Groups[3].Value);
-                        text = text.Replace(match.Value, match.Value + "=" + result.ToString());
-                        break;
-                    case "-":
-                        result = Int32.Parse(match.Groups[1].Value) - Int32.Parse(match.Groups[3].Value);
-                        text = text.Replace(match.Value, match.Value + "=" + result.ToString());
-                        break;
-                    case "*":
-                        result = Int32.Parse(match.Groups[1].Value) * Int32.Parse(match.Groups[3].Value);
-                        text = text.Replace(match.Value, match.Value + "=" + result.ToString());
-                        break;
-                    case "/":
-                        result = Int32.Parse(match.Groups[1].Value) / Int32.Parse(match.Groups[3].Value);
-                        text = text.Replace(match.Value, match.Value + "=" + result.ToString());
-                        break;
-                }
-
+                var group = match.Groups[2].ToString();
+                var result = actions[group](match.Groups[1].Value, match.Groups[3].Value);
+                Console.WriteLine($"{match.Value}={result}");
             }
-            Console.WriteLine(text);
+
         }
         static void  Task1() 
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\licenseplates.txt");
+            string text = System.IO.File.ReadAllText(@"files/licenseplates.txt");
             string pattern =  @"\d{2}[A-Z]{2}\d{3}";
             foreach (Match match in Regex.Matches(text, pattern))
             {
@@ -67,9 +63,8 @@ namespace regex
 
         static void Task2()
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\userdata.txt");
+            string text = System.IO.File.ReadAllText(@"files/userdata.txt");
             string pattern = @"[A-Z]{2}\d{7}";
-            string patternDig = @"\d{7}";
             Regex reg = new Regex(pattern); 
             Regex regDig = new Regex(pattern);
             foreach (Match match in reg.Matches(text))
