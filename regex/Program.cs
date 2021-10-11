@@ -69,9 +69,7 @@ namespace regex
         {
             string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\userdata.txt");
             string pattern = @"[A-Z]{2}\d{7}";
-            string patternDig = @"\d{7}";
             Regex reg = new Regex(pattern); 
-            Regex regDig = new Regex(pattern);
             foreach (Match match in reg.Matches(text))
             {
 
