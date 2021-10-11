@@ -21,7 +21,7 @@ namespace regex
 
         static void Task3()
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\math.txt");
+            string text = System.IO.File.ReadAllText(@"math.txt");
             string mathExp =  @"(\d{1,})(\+|\-|\*|\/)(\d{1,})";
             string group;
             int result;
@@ -54,7 +54,7 @@ namespace regex
         }
         static void  Task1() 
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Astghik\Desktop\licenseplates.txt");
+            string text = System.IO.File.ReadAllText(@"licenseplates.txt");
             string pattern =  @"\d{2}[A-Z]{2}\d{3}";
             foreach (Match match in Regex.Matches(text, pattern))
             {
@@ -67,11 +67,9 @@ namespace regex
 
         static void Task2()
         {
-            string text = System.IO.File.ReadAllText(@"~/UserData.txt");
+            string text = System.IO.File.ReadAllText(@"userdata.txt");
             string pattern = @"[A-Z]{2}\d{7}";
-            string patternDigT = @"\d{7}";
             Regex reg = new Regex(pattern); 
-            Regex regDig = new Regex(pattern);
             foreach (Match match in reg.Matches(text))
             {
 

@@ -6,7 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="UserData.txt">
+    <None Update="licenseplates.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="math.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="userdata.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
